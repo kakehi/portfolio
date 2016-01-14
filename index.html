@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<!--script src="js/jquery.min.js"></script-->
+<script src="js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="js/freewall.js"></script>
+<meta NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<title>Takuma Kakehi Portfolio</title>
+<style>
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('font/open-sans/opensans-regular-webfont.eot');
+    src: url('font/open-sans/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/open-sans/opensans-regular-webfont.woff2') format('woff2'),
+         url('font/open-sans/opensans-regular-webfont.woff') format('woff'),
+         url('font/open-sans/opensans-regular-webfont.ttf') format('truetype'),
+         url('font/open-sans/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('font/open-sans/opensans-semibold-webfont.eot');
+    src: url('font/open-sans/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/open-sans/opensans-semibold-webfont.woff2') format('woff2'),
+         url('font/open-sans/opensans-semibold-webfont.woff') format('woff'),
+         url('font/open-sans/opensans-semibold-webfont.ttf') format('truetype'),
+         url('font/open-sans/opensans-semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('font/open-sans/opensans-light-webfont.eot');
+    src: url('font/open-sans/opensans-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/open-sans/opensans-light-webfont.woff2') format('woff2'),
+         url('font/open-sans/opensans-light-webfont.woff') format('woff'),
+         url('font/open-sans/opensans-light-webfont.ttf') format('truetype'),
+         url('font/open-sans/opensans-light-webfont.svg#open_sanslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sanslight_italic';
+    src: url('font/open-sans/opensans-lightitalic-webfont.eot');
+    src: url('font/open-sans/opensans-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/open-sans/opensans-lightitalic-webfont.woff2') format('woff2'),
+         url('font/open-sans/opensans-lightitalic-webfont.woff') format('woff'),
+         url('font/open-sans/opensans-lightitalic-webfont.ttf') format('truetype'),
+         url('font/open-sans/opensans-lightitalic-webfont.svg#open_sanslight_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latin_modern_roman_caps10Ob';
+    src: url('font/lm-roman/lmromancaps10-oblique-webfont.eot');
+    src: url('font/lm-roman/lmromancaps10-oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/lm-roman/lmromancaps10-oblique-webfont.woff2') format('woff2'),
+         url('font/lm-roman/lmromancaps10-oblique-webfont.woff') format('woff'),
+         url('font/lm-roman/lmromancaps10-oblique-webfont.ttf') format('truetype'),
+         url('font/lm-roman/lmromancaps10-oblique-webfont.svg#latin_modern_roman_caps10Ob') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@-webkit-keyframes bg-color {
+  0% { color: #e74c3c; }
+  20% { color: #f1c40f; }
+  40% { color: #1abc9c; }
+  60% { color: #3498db; }
+  80% { color: #9b59b6; }
+  100% { color: #e74c3c; }
+}
+@keyframes bg-color {
+  0% { color: #e74c3c; }
+  20% { color: #f1c40f; }
+  40% { color: #1abc9c; }
+  60% { color: #3498db; }
+  80% { color: #9b59b6; }
+  100% { color: #e74c3c; }
+}
+
+
+html {
+	font-size : 16px;
+  	font-size : 1rem; /* 48px */
+	
+	font-family: Helvetica, sans-serif;
+	font-weight: lighter;
+	color: #777;
+	background-color: #FFF;/*background-color:#F3F3F3;*/
+	
+}
+
+#loadingSpinner{
+	z-index:1000;
+	position:fixed;
+	left: 50%;
+   	top: 50%;
+   	margin-top: -50px;
+   	margin-left: -50px;
+	display:none;
+}
+
+/*
+--- hover side button
+*/
+._hoverSideButton, ._hoverSideProjectLebel{
+	opacity: 1;
+	max-height: 2.5rem;
+	height: 2.5rem;
+	
+	position:fixed;
+	
+	z-index:10000;
+}
+._hoverSideButton {
+	right: 0.5rem;
+	width: 2.5rem;
+	background-color: #000;
+	
+	-webkit-transition: width 0.5s, height 0.5s; /* For Safari 3.1 to 6.0 */
+	transition: width 0.5s, height 0.5s;
+	/*display: none;*/
+	cursor: pointer;
+}
+._hoverSideButton #_sideMenuTitle, #_tableOfContentsTitle{
+	font-size:1.2rem;
+}
+._hoverSideButton #_sideMenuTitle{
+	
+	text-align:center;
+	display:none;
+}
+._hoverSideProjectLebel{
+	min-width:2.5rem;
+	left: 0.5rem;
+	bottom: -8rem;
+	
+	overflow:visible;
+	
+	display:block;
+}
+._hoverSideProjectLebel ._projectNumber, ._hoverSideProjectLebel ._projectTitle, ._hoverSideProjectLebel ._projectDescription, ._hoverSideProjectLebel ._projectClose{
+	height:2rem;
+	color: white;
+	text-align:left;
+	float:left;
+	min-width: 2.5rem;
+}
+._hoverSideProjectLebel ._projectLabelBackground{
+	min-width:2.5rem;
+	background-color: #000;
+	height: 2.5rem;
+	
+	position:relative;
+	z-index:10000;
+}
+
+._hoverSideProjectLebel ._projectNumber{
+	width:2rem;
+	font-size:1.25rem;
+	font-weight:100;
+	font-family: latin_modern_roman_caps10Ob;
+	text-align:center;
+	margin:.25rem 0rem;
+	padding: 0rem;
+	
+	cursor:default;
+}
+._hoverSideProjectLebel ._projectTitle{
+	font-size:1rem;
+	font-weight:100;
+	font-family: open_sanssemibold;
+	margin:.5rem .5rem;
+}
+._hoverSideProjectLebel ._projectDescription{
+	font-size:0.7rem;
+	font-weight:100;
+	font-family: open_sanslight;
+	margin-top:.8rem;
+	margin-right:1.5rem;
+}
+._hoverSideProjectLebel ._projectClose{
+	width:2rem;
+	float:right;
+}
+._hoverSideProjectLebel ._projectClose img{
+	width:1.5rem;
+	height:1.5rem;
+	padding-top:.5rem
+}
+
+#_menuContainer {
+	top:-2.5rem;
+	max-width: 40rem;
+	overflow: hidden;
+}
+#_sideMenuIcon {
+	margin:30% 0%;
+}
+#_sideMenuIcon div {
+	width: 60%;/*1.25em;*/
+	height: 1px;
+	margin: 20% 0%;
+	background-color: #FFF;
+}
+/*#_menuContainer:hover {
+    width:30%;
+	height:100%;
+}*/
+#_goTopButton {
+	bottom:-2.5rem;
+}
+
+/*
+--- hover side button
+*/
+
+#_tableOfContentsUnorderedList p{
+	
+}
+#_tableOfContentsUnorderedList {
+	text-decolation: none;
+	text-align: left;
+	list-style: none;
+}
+#_tableOfContentsUnorderedList li, #contact #_contactContent {
+	font-size: 0.8rem;
+	padding: 5px;
+	font-size: 75%;
+}
+#_tableOfContentsUnorderedList li a, #contact a {
+	font-size: 0.8rem;
+	color: #777;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#header{
+	text-align: left;
+	max-width:1280px;
+	margin: 0 1rem 2.5rem 1rem;
+	border-bottom: #CCC solid thin;
+}
+#header #title, #header #subtitle{
+	font-family: open_sanslight;
+}
+#header #title{
+	 font-size:2rem;
+	 color:#333;
+	 font-weight:thin; 
+	 padding:2px 10px;
+}
+#header #subtitle{
+	font-family:open_sanssemibold;
+	font-size:1rem;
+	padding:1rem 0.5rem 0.2rem 0.5rem;
+	 
+	color: #e74c3c;
+  	animation: bg-color 15s infinite;
+  	-webkit-animation: bg-color 15s infinite;
+}
+#headerMenu, #headerCategoryMenu, #headerRoleMenu, #_headerSoftMenu {
+	margin-bottom: 2.5rem;
+	padding: 0rem 0rem 3rem 0rem;
+	border-bottom: #CCC solid thin;
+}
+#headerMenu li {
+	list-style: none;
+	float: left;
+}
+#headerMenu .menu {
+	font-size:0.8rem;
+	width: 55px;
+	padding: 0.5rem 2.5rem;
+}
+#headerMenu .menu a {
+	color: #AAA;
+	text-decoration: none;
+}
+
+#header #_tableOfContents {
+	margin: 0px;
+	padding: 0px 0px 40px 0px;
+}
+#main-tableOfContents {
+	-webkit-column-count: 3;
+	-moz-column-count: 3;
+	column-count: 3;
+}
+
+._imageViewersContainer{
+	margin: 0 1rem 0rem 1rem;
+}
+iframe {
+	padding: 20px;
+}
+._imageViewers {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	height:100%;
+}
+._imageViewers img {
+	width: 100%;
+	max-width: 1280px;
+	/*border: solid medium #F9F9F9;*/
+}
+
+
+
+._projectTitle{
+	font-size:8rem;
+	text-align:center;
+	margin:.2rem 0rem;
+	font-family:Raleway
+}
+._projectSubttle{
+	text-align:center;
+	margin-bottom:20px;
+	padding-bottom:20px;
+	font-size:3.6rem;
+	margin:2rem 0rem;
+	font-style:italic;
+	font-family:Raleway
+}
+._imageTextBox{
+	padding-top:20px;
+	text-align:left;
+	max-width:1280px;
+	color:#000;
+	padding:20px 15px;
+	background:rgba(255,255,255,255.5);
+	margin-bottom:120px;
+}
+.informationList{
+	font-size:1.4rem;
+	padding:2px 0px;
+	font-family:Didot;
+}
+.informationDescription{
+	font-size:1.2rem;
+	font-family:Didot;
+}
+
+@media screen and (min-device-width: 1334px) and (orientation: portrait) {
+  html { font-size:100%; }
+  #main-tableOfContents { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; }
+}
+@media screen and (max-device-width: 1334px) and (orientation: portrait)  {
+  html { font-size:150%; }
+  #main-tableOfContents { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; }
+    
+	/*
+	--- hover side button
+	*/
+	._hoverSideButton {height: 8rem; width: 8rem;}
+	#_sideMenuIcon div {height: 3px;}
+	/*
+	--- hover side button
+	*/
+}
+@media screen and (max-device-width: 768px) and (orientation: portrait)  {
+  html { font-size:100%; }
+    
+  #header #title{font-size:3rem;}
+  #header #subtitle{font-size:2rem;}
+  #headerMenu .menu {font-size:1.5rem;}
+  
+  	/*
+	--- hover side button
+	*/
+	._hoverSideButton {height: 8rem; width: 8rem; opacity:0.25;}
+  	._hoverSideButton #_sideMenuTitle, #_tableOfContentsTitle{font-size:2rem;}
+	#_sideMenuIcon div {height: 3px;}
+	#_menuContainer {max-width: max-width;}
+  	#_tableOfContentsUnorderedList li, #contact #_contactContent {font-size: 1.2rem;}
+  	#_tableOfContentsUnorderedList li a, #contact a {font-size: 1.2rem;}<br>
+  	/*
+	--- hover side button
+	*/
+	
+  #main-tableOfContents { -webkit-column-count: 1; -moz-column-count: 1; column-count: 1; }
+}
+
+@media screen and (min-device-width: 1334px) and (orientation: landscape) {
+  html { font-size:100%; }
+}
+@media screen and (max-device-width: 1334px) and (orientation: landscape) {
+  html { font-size:175%; }
+  
+  #header #title{font-size:3rem;}
+  #header #subtitle{font-size:2rem;}
+  #headerMenu .menu {font-size:1.5rem;}
+
+  	/*
+	--- hover side button
+	*/
+	._hoverSideButton {height: 8rem; width: 8rem; opacity:0.25;}
+  	._hoverSideButton #_sideMenuTitle, #_tableOfContentsTitle{font-size:2rem;}
+	#_sideMenuIcon div {height: 3px;}
+	#_tableOfContentsUnorderedList li, #contact #_contactContent {font-size: 1.2rem;}
+  	#_tableOfContentsUnorderedList li a, #contact a {font-size: 1.2rem;}
+  	/*
+	--- hover side button
+	*/
+	
+  #main-tableOfContents { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; }
+}
+@media screen and (max-device-width: 768px) and (orientation: landscape) {
+  html { font-size:50%; }
+  
+  #header #title{font-size:3rem;}
+  #header #subtitle{font-size:2rem;}
+  #headerMenu .menu {font-size:1.5rem;}
+
+  	/*
+	--- hover side button
+	*/
+	._hoverSideButton {height: 8rem; width: 8rem; opacity:0.25;}
+  	._hoverSideButton #_sideMenuTitle, #_tableOfContentsTitle{font-size:2rem;}
+	#_sideMenuIcon div {height: 3px;}
+	#_tableOfContentsUnorderedList li, #contact #_contactContent {font-size: 1.2rem;}
+  	#_tableOfContentsUnorderedList li a, #contact a {font-size: 1.2rem;}
+  	/*
+	--- hover side button
+	*/
+	
+  #main-tableOfContents { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; }
+}
+
+</style>
+</head>
+<body>
+<div id="_dummy-text" style="font-size:3rem; color:#000000; z-index:10000; position:fixed; display:none;">AAAAAAAAA</div>
+<center>
+  <div id='loadingSpinner'><img width='100px' src='loading_spinner.gif'/></div>
+  
+  <!-- Right Top Expanding Menu -->
+  <!--div class="_hoverSideButton"  id="_menuContainer">
+    <div style="padding:0.5rem;">
+      <p id='_sideMenuTitle'>Projects</p>
+      <div id="_sideMenuIcon">
+            <div></div>	<div></div> <div></div>
+      </div>
+      <ul id="_tableOfContentsUnorderedList"></ul>
+    </div>
+  </div-->
+  
+  <!-- Right Bottom GoToTop Button -->
+  <div class="_hoverSideButton" id="_goTopButton"> <img width="80%;" style="text-align:center; padding-top:0.3rem;" src="goTop.png"/> </div>
+  
+  <!-- Left Bottom Project Description Button -->
+  <div class="_hoverSideProjectLebel" id="_projectLabel">
+  	<div class="_projectLabelBackground">
+    	<div class="_projectNumber"></div><div class="_projectTitle"></div><div class="_projectDescription"></div><div class="_projectClose"><img src="close.png" /></div>
+    </div>
+  </div>
+  
+  <!-- Header -->
+  <div id="header">
+    <div>
+      <div id='subtitle'>Work Sample</div>
+      <div id='title'>TAKUMA KAKEHI</div>
+      <ul id="headerMenu">
+        <li class="menu"><a href="http://goo.gl/jl9OnZ">PDF</a></li>
+        <li class="menu"><a href="https://youtu.be/H-6yXdMdsms">Video</a></li>
+        <li id="_toContactButton" class="menu"><a href="#contact">Contact</a></li>
+        <!--div style=" font-size:80%; float:right;  text-align:right;">
+                    225 himrod st., APT#3R.,<br/>
+                    Brooklyn, NY, 11237 USA<br/>
+                    <br/>
+                    TEL : +81-804385-7887<br/>
+                    Email : <a href="emailto:takuma.kakehi@gmail.com">takuma.kakehi@gmail.com</a>
+                </div-->
+      </ul>
+    </div>
+    
+    <!-- SORT BUTTON -->
+    <div style="width:!important 100%; height:19rem;">
+        <div style="width:!important 100%; height:6rem;">
+          <ul id="_headerCategoryMenu" style="text-align:center;">
+          </ul>
+        </div>
+        <div style="width:!important 100%; height:6rem;">
+          <ul id="_headerRoleMenu" style="text-align:center;">
+          </ul>
+        </div>
+        <div style="width:!important 100%; height:2.5rem;">
+          <ul id="_headerSoftMenu" style="text-align:center;">
+          </ul>
+        </div>
+    </div>
+    
+    <!-- PROJECT TABLE OF CONTENTS -->
+    <!--div id="_tableOfContents">
+      <p id="_tableOfContentsTitle">Projects</p>
+      <div id="main-tableOfContents">
+        <ul id="_tableOfContentsUnorderedList"></ul>
+      </div>
+    </div-->
+  
+  </div>
+  
+  <!-- Project Slides -->
+  <div id="_projectSlidesContainer"></div>
+  
+</center>
+</body>
+<script src="js/common.function.js"></script>
+<script src="js/portfolio.js"></script>
+</html>
